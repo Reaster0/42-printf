@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:57:37 by earnaud           #+#    #+#             */
-/*   Updated: 2020/11/30 12:39:00 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/11/30 19:51:39 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ typedef struct		s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_flags
+{
+	int				minus;
+	int				zero;
+	int				fwidth;
+}					t_flags;
 
 size_t				ft_strlen(const char *str);
 int					ft_isalpha(int c);
