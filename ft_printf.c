@@ -6,55 +6,74 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:34:12 by earnaud           #+#    #+#             */
-/*   Updated: 2020/11/30 19:53:30 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/01 19:54:47 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_parsarg(const char *arg)
+int		ft_parsarg(const char *flags, va_list args)
 {
 	t_flags	fl;
+	int		nbr;
 
+	nbr = 0;
 	fl.minus = 0;
 	fl.zero = 0;
 	fl.fwidth = 0;
-	while (ft_strchr("-0", *arg))
+	fl.precision = 0;
+	while (ft_strchr("-0.*", *flags))
 	{
-		if (*arg == '-')
+		if (*flags == '-')
 			fl.minus = 1;
-		if (*arg == '0')
+		if (*flags == '0')
 			fl.zero = 1;
-		arg++;
+		if (*flags == '.')
+		{
+			if (*(flags++) == '*')
+				fl.precision = va_arg(args, int);
+			else
+				while (ft_isdigit((int)*flags))
+				{
+					fl.precision *= 10;
+					fl.precision += (int)*flags - '0';
+					flags++;
+					nbr++;
+				}
+			nbr++;
+			continue;
+		}
+		flags++;
+		nbr++;
 	}
-	while (ft_isdigit((int)*arg))
+	while (ft_isdigit((int)*flags))
 	{
 		fl.fwidth *= 10;
-		fl.fwidth += *arg - '0';
-		arg++;
+		fl.fwidth += *flags - '0';
+		flags++;
+		nbr++;
 	}
+	printf("\nle nombre de char flags lus =%d\n",nbr);
 	printf("\nfl minus =%d\n",fl.minus);
 	printf("\nfl zero =%d\n",fl.zero);
+	printf("\nfl precision =%d\n",fl.precision);
 	printf("\nfl fwidth =%d\n",fl.fwidth);
+	return (nbr);
 }
 
 int ft_printf(const char *str, ...)
 {
 	va_list params;
 	int		i = 0;
-	char	current;
 
 	va_start (params, str);
-	while ((current = *str))
+	while ((*str))
 	{
+		if (*str != '%')
+			ft_putchar_fd(*str, 1);
+		else
+		str += ft_parsarg(str, params);
 		str++;
-		if (current != '%')
-		{
-			ft_putchar_fd(current, 1);
-			continue ;
-		}
-		ft_parsarg(str);
-		break;
 	}
 	va_end(params);
 	return (1);
