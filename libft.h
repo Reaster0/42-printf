@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:57:37 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/01 19:48:51 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/02 15:08:07 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct		s_flags
 	int				minus;
 	int				zero;
 	int				fwidth;
-	int				precision;
+	int				preci;
 }					t_flags;
 
 size_t				ft_strlen(const char *str);
