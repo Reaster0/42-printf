@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:57:37 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/02 15:08:07 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/03 15:44:25 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,5 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 		void (*del)(void *));
 
 int					ft_printf(char const *str, ...);
-
+int					ft_nbrlen(long int nbr);
 #endif
