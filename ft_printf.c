@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:34:12 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/04 13:36:41 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/04 15:15:39 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,33 @@
 
 int		ft_conversion_int(t_flags fl, va_list args)
 {
-	//cas ou -5.4
-	//cas ou .1
-	//cas ou 010 et -42
 	char 	temp;
 	int		tempreci;
 	int		value;
 	char	*svalue;
+	int		no0;
 
-	//en gros travaux
 	value = va_arg(args, int);
-	svalue = ft_itoa(value);
 	temp = ' ';
+	no0 = 0;
+	if (fl.preci == 0  && value == 0)
+	{
+		no0 = 1;
+		svalue = ft_strdup("");
+	}
+	else
+	svalue = ft_itoa(value);
+	if (fl.preci < 0)
+		fl.preci = 0;
 	tempreci = fl.preci;
 	if (fl.zero)
 		temp = '0';
-	if (fl.minus && fl.preci < (long int)ft_strlen(svalue))
+	if (!no0 && fl.minus && fl.preci < (long int)ft_strlen(svalue))
 		ft_putnbr_fd(value, 1);
-	//boucle de fwidth dans le cas ou value est positif
-	while (fl.fwidth && value >= 0 && !fl.minus && fl.fwidth > ft_strlen(svalue) && fl.fwidth > fl.preci)
-	{
-		ft_putchar_fd(temp, 1);
-		fl.fwidth--;
-	}
-	//boucle de fwidth dans le cas ou value est negatif, probleme cas 05d
-	while (fl.fwidth && !fl.minus && fl.fwidth > (long int)ft_strlen(svalue) && fl.fwidth > ((fl.preci + (long int)ft_strlen(svalue)) - ft_nbrlen(value)))
+	while (fl.fwidth && !fl.minus && fl.fwidth > (long int)ft_strlen(svalue) && fl.fwidth > (fl.preci + (long int)ft_strlen(svalue)) - ft_nbrlen(value))
 	{
 		if (value < 0 && fl.zero)
 		{
-
 			ft_putchar_fd('-', 1);
 			value *= -1;
 		}
@@ -59,9 +57,8 @@ int		ft_conversion_int(t_flags fl, va_list args)
 		ft_putchar_fd('0', 1);
 		fl.preci--;
 	}
-	if (!fl.minus || fl.preci >= ft_nbrlen(value))
+	if (!no0 && (!fl.minus || fl.preci >= ft_nbrlen(value)))
 		ft_putnbr_fd(value, 1);
-	//fix avec nomres negatifs
 	while (fl.fwidth && fl.minus && fl.fwidth > (long int)ft_strlen(svalue) && fl.fwidth > (tempreci + (long int)ft_strlen(svalue)) - ft_nbrlen(value)  )
 	{
 		ft_putchar_fd(temp, 1);
@@ -88,11 +85,7 @@ int		ft_nbrlen(long int nbr)
 	if (nbr < 0)
 		nbr *= -1;
 	while(nbr /= 10)
-	{
 		i++;
-		if (!(nbr / 10))
-			return (i);
-	}
 	return (i);
 }
 
@@ -160,7 +153,7 @@ int		ft_parsarg(const char *flags, va_list args)
 	if (fl.preci >= 0)
 		fl.zero = 0;
 	if (fl.preci < 0)
-		fl.preci = 0;
+		fl.preci = -1;
 	if (fl.fwidth < 0)
 	{
 		fl.minus = 1;
