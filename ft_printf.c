@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:34:12 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/03 20:26:31 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/04 13:36:41 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,20 @@ int		ft_conversion_int(t_flags fl, va_list args)
 	if (fl.minus && fl.preci < (long int)ft_strlen(svalue))
 		ft_putnbr_fd(value, 1);
 	//boucle de fwidth dans le cas ou value est positif
-	while (fl.fwidth && value >= 0 && !fl.minus && fl.fwidth > ft_nbrlen(value) && fl.fwidth > fl.preci)
+	while (fl.fwidth && value >= 0 && !fl.minus && fl.fwidth > ft_strlen(svalue) && fl.fwidth > fl.preci)
 	{
 		ft_putchar_fd(temp, 1);
 		fl.fwidth--;
 	}
-	//boucle de fwidth dans le cas ou value est negatif
-	while (fl.fwidth && value < 0 && ((fl.fwidth - (long int)ft_strlen(svalue)) || (fl.fwidth - ((ft_nbrlen(value) - 1) + fl.preci))))
+	//boucle de fwidth dans le cas ou value est negatif, probleme cas 05d
+	while (fl.fwidth && !fl.minus && fl.fwidth > (long int)ft_strlen(svalue) && fl.fwidth > ((fl.preci + (long int)ft_strlen(svalue)) - ft_nbrlen(value)))
 	{
+		if (value < 0 && fl.zero)
+		{
+
+			ft_putchar_fd('-', 1);
+			value *= -1;
+		}
 		ft_putchar_fd(temp, 1);
 		fl.fwidth--;
 	}
@@ -53,9 +59,10 @@ int		ft_conversion_int(t_flags fl, va_list args)
 		ft_putchar_fd('0', 1);
 		fl.preci--;
 	}
-	if (!fl.minus || fl.preci >= (long int)ft_strlen(svalue))
+	if (!fl.minus || fl.preci >= ft_nbrlen(value))
 		ft_putnbr_fd(value, 1);
-	while (fl.fwidth && fl.minus && fl.fwidth > tempreci && fl.fwidth > ft_nbrlen(value))
+	//fix avec nomres negatifs
+	while (fl.fwidth && fl.minus && fl.fwidth > (long int)ft_strlen(svalue) && fl.fwidth > (tempreci + (long int)ft_strlen(svalue)) - ft_nbrlen(value)  )
 	{
 		ft_putchar_fd(temp, 1);
 		fl.fwidth--;
