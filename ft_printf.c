@@ -6,75 +6,31 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:34:12 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/04 15:15:39 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/04 17:49:01 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_conversion_int(t_flags fl, va_list args)
+void	ft_conversion_int0(t_flags *fl,int value,char **svalue,int *no0)
 {
-	char 	temp;
-	int		tempreci;
-	int		value;
-	char	*svalue;
-	int		no0;
-
-	value = va_arg(args, int);
-	temp = ' ';
-	no0 = 0;
-	if (fl.preci == 0  && value == 0)
+	*no0 = 0;
+	if (fl->preci == 0 && value == 0)
 	{
-		no0 = 1;
-		svalue = ft_strdup("");
+		*no0 = 1;
+		*svalue = ft_strdup("");
 	}
 	else
-	svalue = ft_itoa(value);
-	if (fl.preci < 0)
-		fl.preci = 0;
-	tempreci = fl.preci;
-	if (fl.zero)
-		temp = '0';
-	if (!no0 && fl.minus && fl.preci < (long int)ft_strlen(svalue))
-		ft_putnbr_fd(value, 1);
-	while (fl.fwidth && !fl.minus && fl.fwidth > (long int)ft_strlen(svalue) && fl.fwidth > (fl.preci + (long int)ft_strlen(svalue)) - ft_nbrlen(value))
-	{
-		if (value < 0 && fl.zero)
-		{
-			ft_putchar_fd('-', 1);
-			value *= -1;
-		}
-		ft_putchar_fd(temp, 1);
-		fl.fwidth--;
-	}
-	while (fl.preci && fl.preci > ft_nbrlen(value))
-	{
-		if (value < 0)
-		{
-			ft_putchar_fd('-', 1);
-			value *= -1;
-		}
-		ft_putchar_fd('0', 1);
-		fl.preci--;
-	}
-	if (!no0 && (!fl.minus || fl.preci >= ft_nbrlen(value)))
-		ft_putnbr_fd(value, 1);
-	while (fl.fwidth && fl.minus && fl.fwidth > (long int)ft_strlen(svalue) && fl.fwidth > (tempreci + (long int)ft_strlen(svalue)) - ft_nbrlen(value)  )
-	{
-		ft_putchar_fd(temp, 1);
-		fl.fwidth--;
-	}
-	free(svalue);
-	return (1);
+		*svalue = ft_itoa(value);
+	if (fl->preci < 0)
+		fl->preci = 0;	
 }
 
 int		ft_conversion(t_flags fl, char conv, va_list args)
 {
 	if (conv == 'd' || conv == 'i')
-	{
-		ft_conversion_int(fl, args);
-	}
-	return (1);
+		return (ft_conversion_int(fl, args));
+	return (0);
 }
 
 int		ft_nbrlen(long int nbr)
@@ -89,12 +45,11 @@ int		ft_nbrlen(long int nbr)
 	return (i);
 }
 
-int		ft_parsarg(const char *flags, va_list args)
+int		ft_parsarg(const char *flags, va_list args,int *result)
 {
 	t_flags	fl;
 	int		nbr;
 
-	//a mettre sous fonction
 	nbr = 0;
 	fl.minus = 0;
 	fl.zero = 0;
@@ -147,7 +102,6 @@ int		ft_parsarg(const char *flags, va_list args)
 		flags++;
 		nbr++;
 	}
-	//fix des valeurs selon mes notes
 	if (fl.minus)
 		fl.zero = 0;
 	if (fl.preci >= 0)
@@ -161,27 +115,33 @@ int		ft_parsarg(const char *flags, va_list args)
 	}
 
 	//printf("\nfl.minus=%d\nfl.zero=%d\nft.fwidth=%d\nft.preci=%d\n",fl.minus,fl.zero,fl.fwidth,fl.preci);
-	ft_conversion(fl, *flags, args);
+	*result += ft_conversion(fl, *flags, args);
 	return (nbr);
 }
 
 int ft_printf(const char *str, ...)
 {
 	va_list params;
-	int		i = 0;
+	int		i;
+	int		result;
 
+	i = 0;
+	result = 0;
 	va_start (params, str);
 	while ((*str))
 	{
 		if (*str != '%')
+		{
 			ft_putchar_fd(*str, 1);
+			result++;
+		}
 		else
 		{
 			str++;
-			str += ft_parsarg(str, params);
+			str += ft_parsarg(str, params, &result);
 		}
 		str++;
 	}
 	va_end(params);
-	return (1);
+	return (result);
 }

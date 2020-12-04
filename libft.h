@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:57:37 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/03 15:44:25 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/04 17:50:12 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 int					ft_printf(char const *str, ...);
 int					ft_nbrlen(long int nbr);
+int					ft_conversion_int(t_flags fl, va_list args);
+void				ft_conversion_int0(
+		t_flags *fl, int value, char **svalue, int *no0);
 #endif
