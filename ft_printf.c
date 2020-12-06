@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:34:12 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/04 17:49:01 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/05 16:13:31 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,7 @@ int		ft_parsarg(const char *flags, va_list args,int *result)
 		}
 		flags++;
 		nbr++;
-	}
-	if (fl.minus)
-		fl.zero = 0;
+	};
 	if (fl.preci >= 0)
 		fl.zero = 0;
 	if (fl.preci < 0)
@@ -113,6 +111,8 @@ int		ft_parsarg(const char *flags, va_list args,int *result)
 		fl.minus = 1;
 		fl.fwidth *= -1;
 	}
+	if (fl.minus)
+		fl.zero = 0;
 
 	//printf("\nfl.minus=%d\nfl.zero=%d\nft.fwidth=%d\nft.preci=%d\n",fl.minus,fl.zero,fl.fwidth,fl.preci);
 	*result += ft_conversion(fl, *flags, args);
