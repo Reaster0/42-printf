@@ -6,117 +6,115 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 17:44:59 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/05 15:58:51 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/06 21:04:00 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_conversion_int1b(t_flags *fl, int *value, char **svalue)
+int		ft_nbrlen(int value)
 {
-	char temp;
-	char result;
+	int i;
 
-	temp = ' ';
-	if (fl->zero)
-		temp = '0';
+	i = 1;
+	if (value < 0)
+		value = -value;
+	while (value /= 10)
+		i++;
+	return (i);
+}
+
+int		ft_fwidth(t_flags fl, int *value, char *svalue, char padd)
+{
+	int			result;
+	long int	max;
+
 	result = 0;
-	while (fl->fwidth && !fl->minus && fl->fwidth > (long int)ft_strlen(*svalue)
-			&& fl->fwidth > (fl->preci + (long int)ft_strlen(*svalue)) -
-			ft_nbrlen((long int)*value))
+	if (fl.preci > (long int)ft_strlen(svalue))
 	{
-		if (*value < 0 && fl->zero)
-		{
-			result++;
-			ft_putchar_fd('-', 1);
-			*value *= -1;
-		}
+		max = fl.preci;
+		if (svalue[0] == '-')
+			max++;
+	}
+	else
+		max = (long int)ft_strlen(svalue);
+	while (fl.fwidth > max)
+	{
 		result++;
-		ft_putchar_fd(temp, 1);
-		fl->fwidth--;
+		if (*value < 0 && (fl.zero || fl.fwidth - 1 == fl.preci))
+		{
+			ft_putchar_fd('-', 1);
+			*value =  -*value;
+			if (fl.fwidth - 1 > max)
+			continue ;
+		}
+		else
+			ft_putchar_fd(padd, 1);
+		fl.fwidth--;
 	}
 	return (result);
 }
 
-int		ft_conversion_int1(t_flags *fl, int *value, char **svalue, int no0)
-{
-	char	temp;
-	int		result;
-
-	result = 0;
-	temp = ' ';
-	if (fl->zero)
-		temp = '0';
-	if (!no0 && fl->minus && fl->preci < (long int)ft_strlen(*svalue) &&
-			(fl->preci != ft_nbrlen(*value) || *value >= 0))
-	{
-		result += ft_nbrlen(*value);
-		ft_putnbr_fd(*value, 1);
-	}
-	result += ft_conversion_int1b(fl, value, svalue);
-	return (result);
-}
-
-int		ft_conversion_int2b(t_flags *fl, int *value)
+int		ft_number(t_flags fl, int *value)
 {
 	int result;
 
 	result = 0;
-	while (fl->preci && fl->preci > ft_nbrlen((long int)*value))
-	{
-		if (*value < 0)
-		{
-			result++;
-			ft_putchar_fd('-', 1);
-			*value *= -1;
-		}
-		result++;
-		ft_putchar_fd('0', 1);
-		fl->preci--;
-	}
-	return (result);
-}
-
-int		ft_conversion_int2(t_flags *fl, int *value, int no0, char **svalue)
-{
-	int		tempreci;
-	char	temp;
-	int		result;
-
-	result = 0;
-	temp = ' ';
-	if (fl->zero)
-		temp = '0';
-	tempreci = fl->preci;
-	result += ft_conversion_int2b(fl, value);
-	if (!no0 && (!fl->minus || ((fl->preci >= ft_nbrlen(*value)))))
+	result += ft_nbrlen(*value);
+	if (!(fl.preci = 0 && *value == 0))
 	{
 		result += ft_nbrlen(*value);
 		ft_putnbr_fd(*value, 1);
 	}
-	while (fl->fwidth && fl->minus && fl->fwidth > (long int)ft_strlen(*svalue)
-			&& fl->fwidth > (tempreci +
-				(long int)ft_strlen(*svalue)) - ft_nbrlen((long int)*value))
+	if (*value < 0)
+		*value = -*value;
+	return (result);
+}
+
+int		ft_preci(t_flags fl, int *value)
+{
+	int		result;
+
+	result = 0;
+	if (*value < 0)
 	{
 		result++;
-		ft_putchar_fd(temp, 1);
-		fl->fwidth--;
+		ft_putchar_fd('-', 1);
+		*value = -*value;
 	}
+	while (fl.preci > ft_nbrlen(*value))
+	{
+		result++;
+		ft_putchar_fd('0', 1);
+		fl.preci--;
+	}
+	ft_number(fl, value);
 	return (result);
 }
 
 int		ft_conversion_int(t_flags fl, va_list args)
 {
+	int		result;
 	int		value;
 	char	*svalue;
-	int		no0;
-	char	result;
+	char 	padd;
 
-	result = 0;
 	value = va_arg(args, int);
-	ft_conversion_int0(&fl, value, &svalue, &no0);
-	result += ft_conversion_int1(&fl, &value, &svalue, no0);
-	result += ft_conversion_int2(&fl, &value, no0, &svalue);
+	svalue = ft_itoa(value);
+	result = 0;
+	padd = ' ';
+	if (fl.zero)
+		padd = '0';
+	if (fl.minus)
+	{
+		result += ft_preci(fl, &value);
+		result += ft_fwidth(fl, &value, svalue, padd);
+	}
+	else
+	{
+		result += ft_fwidth(fl, &value, svalue, padd);
+		result += ft_preci(fl, &value);
+	}
 	free(svalue);
 	return (result);
 }

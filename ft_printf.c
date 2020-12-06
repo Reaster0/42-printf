@@ -6,43 +6,17 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:34:12 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/05 16:13:31 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/06 12:12:46 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	ft_conversion_int0(t_flags *fl,int value,char **svalue,int *no0)
-{
-	*no0 = 0;
-	if (fl->preci == 0 && value == 0)
-	{
-		*no0 = 1;
-		*svalue = ft_strdup("");
-	}
-	else
-		*svalue = ft_itoa(value);
-	if (fl->preci < 0)
-		fl->preci = 0;	
-}
 
 int		ft_conversion(t_flags fl, char conv, va_list args)
 {
 	if (conv == 'd' || conv == 'i')
 		return (ft_conversion_int(fl, args));
 	return (0);
-}
-
-int		ft_nbrlen(long int nbr)
-{
-	int i;
-
-	i = 1;
-	if (nbr < 0)
-		nbr *= -1;
-	while(nbr /= 10)
-		i++;
-	return (i);
 }
 
 int		ft_parsarg(const char *flags, va_list args,int *result)
