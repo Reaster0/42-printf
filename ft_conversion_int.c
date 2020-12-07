@@ -6,13 +6,13 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 17:44:59 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/07 15:07:00 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/07 17:58:35 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_nbrlen(int value)
+static int		ft_nbrlen(int value)
 {
 	int i;
 
@@ -24,7 +24,7 @@ int		ft_nbrlen(int value)
 	return (i);
 }
 
-int		ft_fwidth(t_flags fl, int *value, char *svalue, char padd)
+static int		ft_fwidth(t_flags fl, int *value, char *svalue, char padd)
 {
 	int			result;
 	int			max;
@@ -52,7 +52,7 @@ int		ft_fwidth(t_flags fl, int *value, char *svalue, char padd)
 	return (result);
 }
 
-int		ft_number(t_flags fl, int *value)
+static int		ft_number(t_flags fl, int *value)
 {
 	int result;
 
@@ -72,7 +72,7 @@ int		ft_number(t_flags fl, int *value)
 	return (result);
 }
 
-int		ft_preci(t_flags fl, int *value)
+static int		ft_preci(t_flags fl, int *value)
 {
 	int		result;
 
