@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 17:44:59 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/07 14:34:05 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/07 15:07:00 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,23 @@ int		ft_nbrlen(int value)
 int		ft_fwidth(t_flags fl, int *value, char *svalue, char padd)
 {
 	int			result;
-	long int	max;
+	int			max;
 
 	result = 0;
-	if (fl.preci >= (long int)ft_strlen(svalue))
-	{
-		max = fl.preci;
-		if (svalue[0] == '-')
-			max++;
-	}
-	else
+	max = fl.preci;
+	if (fl.preci < (long int)ft_strlen(svalue))
 		max = (long int)ft_strlen(svalue);
+	else if (svalue[0] == '-')
+		max++;
 	while (fl.fwidth > max)
 	{
 		result++;
 		if (*value < 0 && (fl.zero || fl.fwidth - 1 == fl.preci))
 		{
 			ft_putchar_fd('-', 1);
-			*value =  -*value;
-			//maybe if (fl.fwidth - 1 > max
+			*value = -*value;
 			if (fl.fwidth > max)
-			continue ;
+				continue ;
 		}
 		else
 			ft_putchar_fd(padd, 1);
@@ -102,7 +98,7 @@ int		ft_conversion_int(t_flags fl, va_list args)
 	int		result;
 	int		value;
 	char	*svalue;
-	char 	padd;
+	char	padd;
 
 	value = va_arg(args, int);
 	svalue = ft_itoa(value);
