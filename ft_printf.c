@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:34:12 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/06 12:12:46 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/07 16:17:01 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		ft_conversion(t_flags fl, char conv, va_list args)
 {
 	if (conv == 'd' || conv == 'i')
 		return (ft_conversion_int(fl, args));
+	if (conv == 'c')
+		return (ft_conversion_char(fl, args));
 	return (0);
 }
 
