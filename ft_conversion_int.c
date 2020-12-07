@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 17:44:59 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/07 13:35:40 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/07 14:34:05 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_fwidth(t_flags fl, int *value, char *svalue, char padd)
 	long int	max;
 
 	result = 0;
-	if (fl.preci > (long int)ft_strlen(svalue))
+	if (fl.preci >= (long int)ft_strlen(svalue))
 	{
 		max = fl.preci;
 		if (svalue[0] == '-')
@@ -45,7 +45,8 @@ int		ft_fwidth(t_flags fl, int *value, char *svalue, char padd)
 		{
 			ft_putchar_fd('-', 1);
 			*value =  -*value;
-			if (fl.fwidth - 1 > max)
+			//maybe if (fl.fwidth - 1 > max
+			if (fl.fwidth > max)
 			continue ;
 		}
 		else
@@ -60,7 +61,6 @@ int		ft_number(t_flags fl, int *value)
 	int result;
 
 	result = 0;
-	result += ft_nbrlen(*value);
 	if (!(fl.preci == 0 && *value == 0))
 	{
 		result += ft_nbrlen(*value);
@@ -93,7 +93,7 @@ int		ft_preci(t_flags fl, int *value)
 		ft_putchar_fd('0', 1);
 		fl.preci--;
 	}
-	ft_number(fl, value);
+	result += ft_number(fl, value);
 	return (result);
 }
 
