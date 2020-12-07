@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 17:44:59 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/06 21:04:00 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/07 13:35:40 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,15 @@ int		ft_number(t_flags fl, int *value)
 
 	result = 0;
 	result += ft_nbrlen(*value);
-	if (!(fl.preci = 0 && *value == 0))
+	if (!(fl.preci == 0 && *value == 0))
 	{
 		result += ft_nbrlen(*value);
 		ft_putnbr_fd(*value, 1);
+	}
+	else if (fl.fwidth)
+	{
+		result++;
+		ft_putchar_fd(' ', 1);
 	}
 	if (*value < 0)
 		*value = -*value;
