@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 17:44:59 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/07 17:58:35 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/08 18:24:15 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int		ft_preci(t_flags fl, int *value)
 	return (result);
 }
 
-int		ft_conversion_int(t_flags fl, va_list args)
+int				ft_conversion_int(t_flags fl, va_list args)
 {
 	int		result;
 	int		value;

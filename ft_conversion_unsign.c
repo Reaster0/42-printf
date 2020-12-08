@@ -6,13 +6,13 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 17:01:52 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/08 17:42:25 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/08 18:26:46 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int      ft_nbrlen(long unsigned int value)
+static int		ft_nbrlen(long unsigned int value)
 {
 	int i;
 
@@ -22,10 +22,10 @@ static int      ft_nbrlen(long unsigned int value)
 	return (i);
 }
 
-static int      ft_fwidth(t_flags fl, char *svalue, char padd)
+static int		ft_fwidth(t_flags fl, char *svalue, char padd)
 {
-	int         result;
-	int         max;
+	int		result;
+	int		max;
 
 	result = 0;
 	max = fl.preci;
@@ -40,7 +40,7 @@ static int      ft_fwidth(t_flags fl, char *svalue, char padd)
 	return (result);
 }
 
-static int      ft_number(t_flags fl, long unsigned int *value)
+static int		ft_number(t_flags fl, long unsigned int *value)
 {
 	int result;
 
@@ -58,9 +58,9 @@ static int      ft_number(t_flags fl, long unsigned int *value)
 	return (result);
 }
 
-static int      ft_preci(t_flags fl, long unsigned int *value)
+static int		ft_preci(t_flags fl, long unsigned int *value)
 {
-	int     result;
+	int		result;
 
 	result = 0;
 	while (fl.preci > ft_nbrlen(*value))
@@ -73,7 +73,7 @@ static int      ft_preci(t_flags fl, long unsigned int *value)
 	return (result);
 }
 
-int		ft_conversion_unsign(t_flags fl, va_list arg)
+int				ft_conversion_unsign(t_flags fl, va_list arg)
 {
 	unsigned int		result;
 	long unsigned int	value;

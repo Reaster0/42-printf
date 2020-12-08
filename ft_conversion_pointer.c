@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 18:41:41 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/08 18:18:47 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/08 18:24:28 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void		number_conv(char *final, int *result, t_flags fl)
 	i = 0;
 	(*result) += 2;
 	ft_putstr_fd("0x", 1);
-		while (fl.preci > 0 && fl.preci > (long int)ft_strlen(final))
-		{
-			(*result)++;
-			ft_putchar_fd('0', 1);
-			fl.preci--;
-		}
+	while (fl.preci > 0 && fl.preci > (long int)ft_strlen(final))
+	{
+		(*result)++;
+		ft_putchar_fd('0', 1);
+		fl.preci--;
+	}
 	while (final[i])
 	{
 		(*result)++;

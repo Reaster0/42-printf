@@ -6,12 +6,12 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:57:37 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/08 18:14:31 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/08 18:22:41 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#ifndef LIBFT_H
+# define LIBFT_H
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
