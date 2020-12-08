@@ -6,19 +6,25 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 18:41:41 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/08 16:34:54 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/08 18:18:47 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		number_conv(char *final, int *result)
+static void		number_conv(char *final, int *result, t_flags fl)
 {
 	int i;
 
 	i = 0;
 	(*result) += 2;
 	ft_putstr_fd("0x", 1);
+		while (fl.preci > 0 && fl.preci > (long int)ft_strlen(final))
+		{
+			(*result)++;
+			ft_putchar_fd('0', 1);
+			fl.preci--;
+		}
 	while (final[i])
 	{
 		(*result)++;
@@ -50,13 +56,13 @@ int				ft_conversion_pointer(t_flags fl, va_list args)
 		final[0] = '\0';
 	if (fl.minus)
 	{
-		number_conv(final, &result);
+		number_conv(final, &result, fl);
 		fwidth(fl.fwidth, ft_strlen(final), &result);
 	}
 	else
 	{
 		fwidth(fl.fwidth, ft_strlen(final), &result);
-		number_conv(final, &result);
+		number_conv(final, &result, fl);
 	}
 	free(final);
 	return (result);

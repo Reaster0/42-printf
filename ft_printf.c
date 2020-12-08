@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:34:12 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/08 14:47:47 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/08 17:24:12 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		ft_conversion(t_flags fl, char conv, va_list args)
 		return (ft_conversion_string(fl, args));
 	if (conv == 'p')
 		return (ft_conversion_pointer(fl, args));
+	if (conv == 'u')
+		return (ft_conversion_unsign(fl, args));
 	return (0);
 }
 

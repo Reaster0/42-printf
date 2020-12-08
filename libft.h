@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:57:37 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/08 15:12:15 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/08 18:14:31 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
-void				ft_putnbr_fd(int n, int fd);
+void				ft_putnbr_fd(long int n, int fd);
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **alst, t_list *new);
@@ -85,5 +85,6 @@ int					ft_conversion_int(t_flags fl, va_list args);
 int					ft_conversion_char(t_flags fl, va_list args);
 int					ft_conversion_pointer(t_flags fl, va_list args);
 int					ft_conversion_string(t_flags fl, va_list args);
+int					ft_conversion_unsign(t_flags fl, va_list args);
 
 #endif
