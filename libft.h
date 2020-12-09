@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:57:37 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/08 18:22:41 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/08 18:48:59 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,13 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 		void (*del)(void *));
 
-char				*ft_itoa_base(unsigned long n, char *base);
+char				*ft_itoa_base(long n, char *base);
 int					ft_printf(char const *str, ...);
 int					ft_conversion_int(t_flags fl, va_list args);
 int					ft_conversion_char(t_flags fl, va_list args);
 int					ft_conversion_pointer(t_flags fl, va_list args);
 int					ft_conversion_string(t_flags fl, va_list args);
 int					ft_conversion_unsign(t_flags fl, va_list args);
+int					ft_conversion_hexa(t_flags fl, va_list args);
 
 #endif
