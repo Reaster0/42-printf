@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:34:12 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/08 18:30:11 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/09 20:43:41 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ int		ft_conversion(t_flags fl, char conv, va_list args)
 		return (ft_conversion_pointer(fl, args));
 	if (conv == 'u')
 		return (ft_conversion_unsign(fl, args));
-	if (conv == 'x')
-		return (ft_conversion_hexa(fl, args));
+	if (conv == 'x' || conv == 'X')
+		return (ft_conversion_hexa(fl, args, conv));
+	if (conv == '%')
+		return (ft_conversion_percent(fl));
 	return (0);
 }
 
@@ -63,7 +65,8 @@ int		ft_parsarg(const char *flags, va_list args,int *result)
 					flags++;
 					nbr++;
 				}
-			continue;
+			if (*flags)
+				continue;
 		}
 		else if (ft_isdigit((int)*flags) || *flags == '*')
 		{
@@ -85,8 +88,8 @@ int		ft_parsarg(const char *flags, va_list args,int *result)
 		}
 		flags++;
 		nbr++;
-	};
-	if (fl.preci >= 0)
+	}
+	if (fl.preci >= 0 && *flags != '%')
 		fl.zero = 0;
 	if (fl.preci < 0)
 		fl.preci = -1;

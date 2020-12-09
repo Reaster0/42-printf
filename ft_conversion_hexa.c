@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:29:20 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/09 16:19:41 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/09 18:15:13 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,16 @@ static int		ft_hexa(t_flags fl, char *hexa)
 	return (result);
 }
 
-int				ft_conversion_hexa(t_flags fl, va_list args)
+int				ft_conversion_hexa(t_flags fl, va_list args, char l_c)
 {
 	int		result;
 	char	*final;
 
 	result = 0;
-	final = ft_itoa_base(va_arg(args, long), "0123456789abcdef");
+	if (l_c == 'x')
+		final = ft_itoa_base(va_arg(args, long long), "0123456789abcdef");
+	else
+		final = ft_itoa_base(va_arg(args, long long), "0123456789ABCDEF");
 	if (final[0] == '0' && fl.preci != -1)
 		final[0] = '\0';
 	if (fl.minus)

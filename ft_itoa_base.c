@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 15:10:32 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/08 18:42:37 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/09 18:16:21 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		base_size(char *base)
 	return (i);
 }
 
-static int		size_forecast(long n, char *base)
+static int		size_forecast(long long n, char *base)
 {
 	int	i;
 	int	sign;
@@ -73,7 +73,7 @@ static void		str_rev(char *str)
 	}
 }
 
-char			*ft_itoa_base(long n, char *base)
+char			*ft_itoa_base(long long n, char *base)
 {
 	int		i;
 	char	*str;
