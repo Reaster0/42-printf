@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:34:12 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/10 11:30:31 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/10 18:28:45 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,88 +39,12 @@ int		ft_check_error(char *param, const char *str)
 	while (str[i])
 	{
 		if (ft_strchr(param, str[i]))
-				return (1);
+			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int		ft_parsarg(const char *flags, va_list args,int *result)
-{
-	t_flags	fl;
-	int		nbr;
-
-	nbr = 0;
-	fl.minus = 0;
-	fl.zero = 0;
-	fl.fwidth = 0;
-	fl.preci = -1;
-	if (!ft_check_error("cspdiuxX%", flags))
-			return (1);
-	while (ft_strchr("-0.*123456789", *flags))
-	{
-		if (*flags == '-')
-			fl.minus = 1;
-		else if (*flags == '0')
-			fl.zero = 1;
-		else if (*flags == '.')
-		{
-			fl.preci = 0;
-			nbr++;
-			if (*(++flags) == '*')
-			{
-				fl.preci = va_arg(args, int);
-				flags++;
-				nbr++;
-			}
-			else
-				while (ft_isdigit((int)*flags))
-				{
-					fl.preci *= 10;
-					fl.preci += (int)*flags - '0';
-					flags++;
-					nbr++;
-				}
-			if (*flags)
-				continue;
-		}
-		else if (ft_isdigit((int)*flags) || *flags == '*')
-		{
-			if (*flags == '*')
-			{
-				fl.fwidth = va_arg(args, int);
-				flags++;
-				nbr++;
-			}
-			else
-				while (ft_isdigit((int)*flags))
-				{
-					fl.fwidth *= 10;
-					fl.fwidth += *flags - '0';
-					flags++;
-					nbr++;
-				}
-			continue;
-		}
-		flags++;
-		nbr++;
-	}
-	if (fl.preci >= 0 && *flags != '%')
-		fl.zero = 0;
-	if (fl.preci < 0)
-		fl.preci = -1;
-	if (fl.fwidth < 0)
-	{
-		fl.minus = 1;
-		fl.fwidth *= -1;
-	}
-	if (fl.minus)
-		fl.zero = 0;
-
-	//printf("\nfl.minus=%d\nfl.zero=%d\nft.fwidth=%d\nft.preci=%d\n",fl.minus,fl.zero,fl.fwidth,fl.preci);
-	*result += ft_conversion(fl, *flags, args);
-	return (nbr);
-}
 
 int ft_printf(const char *str, ...)
 {

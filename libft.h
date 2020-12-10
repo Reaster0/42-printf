@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:57:37 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/09 18:17:05 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/10 18:41:59 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
-char				*ft_itoa(int n);
+char				*ft_itoa(long int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
@@ -81,6 +81,9 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 char				*ft_itoa_base(long long n, char *base);
 int					ft_printf(char const *str, ...);
+int					ft_parsarg(const char *flags, va_list args,int *result);
+int					ft_check_error(char *param, const char *str);
+int					ft_conversion(t_flags fl, char conv, va_list args);
 int					ft_conversion_int(t_flags fl, va_list args);
 int					ft_conversion_char(t_flags fl, va_list args);
 int					ft_conversion_pointer(t_flags fl, va_list args);

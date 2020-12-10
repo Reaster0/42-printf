@@ -6,13 +6,13 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 17:44:59 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/08 18:24:15 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/10 12:46:35 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_nbrlen(int value)
+static int		ft_nbrlen(long value)
 {
 	int i;
 
@@ -24,7 +24,7 @@ static int		ft_nbrlen(int value)
 	return (i);
 }
 
-static int		ft_fwidth(t_flags fl, int *value, char *svalue, char padd)
+static int		ft_fwidth(t_flags fl, long *value, char *svalue, char padd)
 {
 	int			result;
 	int			max;
@@ -52,7 +52,7 @@ static int		ft_fwidth(t_flags fl, int *value, char *svalue, char padd)
 	return (result);
 }
 
-static int		ft_number(t_flags fl, int *value)
+static int		ft_number(t_flags fl, long *value)
 {
 	int result;
 
@@ -72,7 +72,7 @@ static int		ft_number(t_flags fl, int *value)
 	return (result);
 }
 
-static int		ft_preci(t_flags fl, int *value)
+static int		ft_preci(t_flags fl, long *value)
 {
 	int		result;
 
@@ -96,7 +96,7 @@ static int		ft_preci(t_flags fl, int *value)
 int				ft_conversion_int(t_flags fl, va_list args)
 {
 	int		result;
-	int		value;
+	long	value;
 	char	*svalue;
 	char	padd;
 
