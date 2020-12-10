@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:34:12 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/09 20:43:41 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/10 11:30:31 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,20 @@ int		ft_conversion(t_flags fl, char conv, va_list args)
 	return (0);
 }
 
+int		ft_check_error(char *param, const char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_strchr(param, str[i]))
+				return (1);
+		i++;
+	}
+	return (0);
+}
+
 int		ft_parsarg(const char *flags, va_list args,int *result)
 {
 	t_flags	fl;
@@ -41,6 +55,8 @@ int		ft_parsarg(const char *flags, va_list args,int *result)
 	fl.zero = 0;
 	fl.fwidth = 0;
 	fl.preci = -1;
+	if (!ft_check_error("cspdiuxX%", flags))
+			return (1);
 	while (ft_strchr("-0.*123456789", *flags))
 	{
 		if (*flags == '-')
