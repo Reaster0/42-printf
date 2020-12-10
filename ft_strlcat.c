@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conversion_percent.c                            :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/09 17:25:25 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/10 18:48:08 by earnaud          ###   ########.fr       */
+/*   Created: 2020/11/05 13:15:17 by earnaud           #+#    #+#             */
+/*   Updated: 2020/11/09 15:41:09 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_conversion_percent(t_flags fl)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int		result;
-	char	padd;
+	size_t i;
+	size_t c;
 
-	padd = ' ';
-	if (fl.zero)
-		padd = '0';
-	result = 1;
-	if (fl.minus)
-		ft_putchar_fd('%', 1);
-	while (fl.fwidth > 1)
+	i = 0;
+	c = 0;
+	while (dst[i] && i < size)
+		i++;
+	while (src[c] && (i + c + 1) < size)
 	{
-		result++;
-		ft_putchar_fd(padd, 1);
-		fl.fwidth--;
+		dst[i + c] = src[c];
+		c++;
 	}
-	if (!fl.minus)
-		ft_putchar_fd('%', 1);
-	return (result);
+	if (i < size)
+		dst[i + c] = 0;
+	return (i + ft_strlen(src));
 }

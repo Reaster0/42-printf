@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:57:37 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/10 18:41:59 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/10 19:03:33 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 char				*ft_itoa_base(long long n, char *base);
 int					ft_printf(char const *str, ...);
-int					ft_parsarg(const char *flags, va_list args,int *result);
+int					ft_parsarg(const char *flags, va_list args, int *result);
 int					ft_check_error(char *param, const char *str);
 int					ft_conversion(t_flags fl, char conv, va_list args);
 int					ft_conversion_int(t_flags fl, va_list args);

@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conversion_percent.c                            :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/09 17:25:25 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/10 18:48:08 by earnaud          ###   ########.fr       */
+/*   Created: 2020/11/12 15:13:47 by earnaud           #+#    #+#             */
+/*   Updated: 2020/11/14 16:17:42 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_conversion_percent(t_flags fl)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int		result;
-	char	padd;
+	size_t	i;
+	char	*result;
 
-	padd = ' ';
-	if (fl.zero)
-		padd = '0';
-	result = 1;
-	if (fl.minus)
-		ft_putchar_fd('%', 1);
-	while (fl.fwidth > 1)
-	{
-		result++;
-		ft_putchar_fd(padd, 1);
-		fl.fwidth--;
-	}
-	if (!fl.minus)
-		ft_putchar_fd('%', 1);
+	i = -1;
+	if (!(result = malloc((ft_strlen(s) + 1) * sizeof(char))))
+		return (0);
+	while (s[++i])
+		result[i] = f(i, s[i]);
+	result[i] = 0;
 	return (result);
 }

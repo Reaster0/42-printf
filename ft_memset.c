@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conversion_percent.c                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/09 17:25:25 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/10 18:48:08 by earnaud          ###   ########.fr       */
+/*   Created: 2020/11/03 18:06:42 by earnaud           #+#    #+#             */
+/*   Updated: 2020/11/13 11:54:49 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_conversion_percent(t_flags fl)
+void	*ft_memset(void *str, int c, size_t n)
 {
-	int		result;
-	char	padd;
+	size_t	i;
+	char	*pstr;
 
-	padd = ' ';
-	if (fl.zero)
-		padd = '0';
-	result = 1;
-	if (fl.minus)
-		ft_putchar_fd('%', 1);
-	while (fl.fwidth > 1)
+	i = 0;
+	pstr = str;
+	while (i < n)
 	{
-		result++;
-		ft_putchar_fd(padd, 1);
-		fl.fwidth--;
+		pstr[i] = (unsigned char)c;
+		i++;
 	}
-	if (!fl.minus)
-		ft_putchar_fd('%', 1);
-	return (result);
+	return (str);
 }

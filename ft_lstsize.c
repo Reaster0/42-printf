@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conversion_percent.c                            :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/09 17:25:25 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/10 18:48:08 by earnaud          ###   ########.fr       */
+/*   Created: 2020/11/15 17:08:37 by earnaud           #+#    #+#             */
+/*   Updated: 2020/11/15 20:04:08 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_conversion_percent(t_flags fl)
+int	ft_lstsize(t_list *lst)
 {
-	int		result;
-	char	padd;
+	size_t i;
 
-	padd = ' ';
-	if (fl.zero)
-		padd = '0';
-	result = 1;
-	if (fl.minus)
-		ft_putchar_fd('%', 1);
-	while (fl.fwidth > 1)
+	i = 0;
+	while (lst)
 	{
-		result++;
-		ft_putchar_fd(padd, 1);
-		fl.fwidth--;
+		lst = lst->next;
+		i++;
 	}
-	if (!fl.minus)
-		ft_putchar_fd('%', 1);
-	return (result);
+	return (i);
 }

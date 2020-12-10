@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conversion_percent.c                            :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/09 17:25:25 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/10 18:48:08 by earnaud          ###   ########.fr       */
+/*   Created: 2020/11/16 15:24:27 by earnaud           #+#    #+#             */
+/*   Updated: 2020/11/16 17:14:47 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_conversion_percent(t_flags fl)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int		result;
-	char	padd;
+	t_list	*result;
+	t_list	*temp;
 
-	padd = ' ';
-	if (fl.zero)
-		padd = '0';
-	result = 1;
-	if (fl.minus)
-		ft_putchar_fd('%', 1);
-	while (fl.fwidth > 1)
+	result = NULL;
+	while (lst && f)
 	{
-		result++;
-		ft_putchar_fd(padd, 1);
-		fl.fwidth--;
+		temp = ft_lstnew(f(lst->content));
+		if (!temp->content)
+		{
+			ft_lstclear(&result, del);
+			return (result);
+		}
+		ft_lstadd_back(&result, temp);
+		lst = lst->next;
 	}
-	if (!fl.minus)
-		ft_putchar_fd('%', 1);
 	return (result);
 }

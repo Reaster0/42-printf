@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conversion_percent.c                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/09 17:25:25 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/10 18:48:08 by earnaud          ###   ########.fr       */
+/*   Created: 2020/11/03 18:07:33 by earnaud           #+#    #+#             */
+/*   Updated: 2020/11/08 19:10:04 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_conversion_percent(t_flags fl)
+char	*ft_strrchr(char *str, int c)
 {
-	int		result;
-	char	padd;
+	int i;
 
-	padd = ' ';
-	if (fl.zero)
-		padd = '0';
-	result = 1;
-	if (fl.minus)
-		ft_putchar_fd('%', 1);
-	while (fl.fwidth > 1)
+	i = ft_strlen(str) + 1;
+	while (i)
 	{
-		result++;
-		ft_putchar_fd(padd, 1);
-		fl.fwidth--;
+		i--;
+		if (c == str[i])
+			return (&str[i]);
 	}
-	if (!fl.minus)
-		ft_putchar_fd('%', 1);
-	return (result);
+	return (0);
 }

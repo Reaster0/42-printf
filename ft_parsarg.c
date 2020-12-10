@@ -6,12 +6,11 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 18:34:30 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/10 18:34:48 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/10 18:56:32 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 static void	ft_preci(t_flags *fl, int *nbr, const char **flags, va_list args)
 {
@@ -77,7 +76,7 @@ static void	ft_init_fix(t_flags *fl, int *nbr, char flags, int indic)
 	}
 }
 
-static void srflags(t_flags *fl, const char **flags, va_list args, int *nbr)
+static void	srflags(t_flags *fl, const char **flags, va_list args, int *nbr)
 {
 	while (ft_strchr("-0.*123456789", **flags))
 	{
@@ -102,7 +101,7 @@ static void srflags(t_flags *fl, const char **flags, va_list args, int *nbr)
 	}
 }
 
-int		ft_parsarg(const char *flags, va_list args,int *result)
+int			ft_parsarg(const char *flags, va_list args, int *result)
 {
 	t_flags	fl;
 	int		nbr;

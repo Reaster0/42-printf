@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conversion_percent.c                            :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/09 17:25:25 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/10 18:48:08 by earnaud          ###   ########.fr       */
+/*   Created: 2020/11/05 17:21:09 by earnaud           #+#    #+#             */
+/*   Updated: 2020/11/09 15:37:06 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_conversion_percent(t_flags fl)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int		result;
-	char	padd;
+	size_t i;
+	size_t j;
+	size_t little_len;
 
-	padd = ' ';
-	if (fl.zero)
-		padd = '0';
-	result = 1;
-	if (fl.minus)
-		ft_putchar_fd('%', 1);
-	while (fl.fwidth > 1)
+	i = 0;
+	little_len = ft_strlen(little);
+	if (!*little)
+		return ((char *)big);
+	while (i <= len && big[i])
 	{
-		result++;
-		ft_putchar_fd(padd, 1);
-		fl.fwidth--;
+		j = 0;
+		while (j <= little_len && i + j < len)
+		{
+			if (little[j] == big[i + j])
+			{
+				if (j == little_len - 1)
+					return ((char *)(big + i));
+				j++;
+			}
+			else
+				break ;
+		}
+		i++;
 	}
-	if (!fl.minus)
-		ft_putchar_fd('%', 1);
-	return (result);
+	return (0);
 }
