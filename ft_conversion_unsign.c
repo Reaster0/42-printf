@@ -6,7 +6,7 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 17:01:52 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/08 18:26:46 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/11 15:35:17 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int				ft_conversion_unsign(t_flags fl, va_list arg)
 	char				*svalue;
 	char				padd;
 
-	value = va_arg(arg, long unsigned int);
+	value = va_arg(arg, unsigned int);
 	svalue = ft_itoa_base(value, "0123456789");
 	result = 0;
 	padd = ' ';
