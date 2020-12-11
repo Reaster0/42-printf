@@ -6,11 +6,11 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:29:20 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/11 15:36:14 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/11 17:34:29 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static int		width(t_flags fl, char *hex)
 {

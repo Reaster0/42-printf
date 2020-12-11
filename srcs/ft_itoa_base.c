@@ -6,11 +6,11 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 15:10:32 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/09 18:16:21 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/11 17:37:27 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static char		*zero_case(char *base)
 {

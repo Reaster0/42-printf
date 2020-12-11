@@ -6,11 +6,11 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 17:01:52 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/11 15:35:17 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/11 17:36:10 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static int		ft_nbrlen(long unsigned int value)
 {

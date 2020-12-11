@@ -6,11 +6,11 @@
 /*   By: earnaud <earnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 18:34:30 by earnaud           #+#    #+#             */
-/*   Updated: 2020/12/10 18:56:32 by earnaud          ###   ########.fr       */
+/*   Updated: 2020/12/11 17:37:43 by earnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static void	ft_preci(t_flags *fl, int *nbr, const char **flags, va_list args)
 {
