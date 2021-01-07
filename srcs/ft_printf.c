@@ -48,10 +48,8 @@ int		ft_check_error(char *param, const char *str)
 int		ft_printf(const char *str, ...)
 {
 	va_list params;
-	int		i;
 	int		result;
 
-	i = 0;
 	result = 0;
 	va_start(params, str);
 	while ((*str))
